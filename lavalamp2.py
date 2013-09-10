@@ -60,13 +60,23 @@ def getWeight(index, length):
     return ((index * 1.0 / ((length - 1) * 1.0 / 2.0)) * WEIGHT * 1.0) - WEIGHT
 
 #testing
-e = EmployeeList( ['a', 'b', 'c', 'e', 'd', 'f', 'g'] )  ## create instance
 
-def test(num):
-    for i in xrange(num):
-        e.run()
-        print(e)
 
+class Test:
+    names = ['a', 'b', 'c', 'e', 'd', 'f', 'g']
+    e = EmployeeList(names)
+    stats = dict((el, 0) for el in names)
+    def run(self, num):
+        for i in xrange(num):
+            self.e.run()
+            self.check()
+    def check(self):
+        for emp in self.e.employeeList:
+            self.stats[emp.name] += self.e.employeeList.index(emp)
+    
+t = Test()
+t.run(10000)
+print min(t.stats.values()) - max(t.stats.values())
 
 
     
