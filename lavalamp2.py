@@ -18,7 +18,7 @@ class Employee:
         else:
             return -1 if abs(self.weight) < abs(other.weight) else 1;
     def __repr__(self):
-        return self.name #+ ": " + str(self.weight)
+        return self.name + ": " + str(self.weight)
 
 class EmployeeList:
     employeeList = []
@@ -52,18 +52,14 @@ class EmployeeList:
             empIndex += 1
     def __repr__(self):
         return "EL: " +  self.employeeList.__repr__()
-                    
-                    
-    
 
 def getWeight(index, length):
     return ((index * 1.0 / ((length - 1) * 1.0 / 2.0)) * WEIGHT * 1.0) - WEIGHT
 
 #testing
 
-
 class Test:
-    names = ['a', 'b', 'c', 'e', 'd', 'f', 'g']
+    names = ['David', 'Zach', 'Tom', 'Nick', 'Mary', 'Allison', 'Alan', 'Sonali']
     e = EmployeeList(names)
     stats = dict((el, 0) for el in names)
     def run(self, num):
@@ -72,11 +68,12 @@ class Test:
             self.check()
     def check(self):
         for emp in self.e.employeeList:
-            self.stats[emp.name] += self.e.employeeList.index(emp)
-    
-t = Test()
-t.run(10000)
-print min(t.stats.values()) - max(t.stats.values())
+            self.stats[emp.name] += self.e.employeeList.index(emp) - (self.e.employeeList.index(emp) / 2.0)
+
+def runTest():
+    t = Test()
+    t.run(10000)
+    print min(t.stats.values()) - max(t.stats.values())
 
 
     
